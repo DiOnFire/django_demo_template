@@ -1,9 +1,10 @@
 pipeline {
-    agent {
-        docker {image 'python:3.10'}
-    }
+    agent any
     stages {
         stage('Run Test') {
+            agent {
+                docker {image 'python:3.10'}
+            }
             steps {
                 sh '''
                     python3 -m venv .venv
