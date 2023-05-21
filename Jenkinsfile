@@ -16,7 +16,7 @@ pipeline {
         stage("build") {
             agent any
             steps {
-                sh 'docker build . -t DiOnFire/django_demo_template:${GIT_COMMIT} -t DiOnFire/django_demo_template:latest'
+                sh 'docker build . -t dionfire/django_demo_template:${GIT_COMMIT} -t dionfire/django_demo_template:latest'
             }
         }
         stage("push") {
@@ -24,8 +24,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
-                    sh 'docker push DiOnFire/django_demo_template:${GIT_COMMIT}'
-                    sh 'docker push DiOnFire/django_demo_template:latest'
+                    sh 'docker push dionfire/django_demo_template:${GIT_COMMIT}'
+                    sh 'docker push dionfire/django_demo_template:latest'
                 }
             }
         }
